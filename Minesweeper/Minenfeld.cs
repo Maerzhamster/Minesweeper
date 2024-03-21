@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Minesweeper
 {
+    /// <summary>
+    /// Class that represents a single field in the area
+    /// </summary>
     public class Minenfeld
     {
         public bool IsMine { get; set; }

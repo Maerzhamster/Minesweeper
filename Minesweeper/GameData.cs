@@ -10,13 +10,13 @@ namespace Minesweeper
 {
     public class GameData
     {
-        public GameData()
+        private GameData()
         {
             myRandom = new Random(DateTime.Now.Millisecond);
             Minenfields = new Minenfeld[10,10];
         }
 
-        private static Random myRandom;
+        private readonly Random myRandom;
 
         private static GameData? instance = null;
         public static GameData GetInstance()

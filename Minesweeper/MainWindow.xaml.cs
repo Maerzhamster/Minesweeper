@@ -62,19 +62,18 @@ namespace Minesweeper
             Minenfeld myFeld = theGame.GetMinenfeld(row, column);
             if (myFeld.IsOpen)
             {
-                switch (theGame.ToStrings(row, column))
+                return theGame.ToStrings(row, column) switch
                 {
-                    case "1": return Constants.FOREGROUND_COLOR_NUMBER_1;
-                    case "2": return Constants.FOREGROUND_COLOR_NUMBER_2;
-                    case "3": return Constants.FOREGROUND_COLOR_NUMBER_3;
-                    case "4": return Constants.FOREGROUND_COLOR_NUMBER_4;
-                    case "5": return Constants.FOREGROUND_COLOR_NUMBER_5;
-                    case "6": return Constants.FOREGROUND_COLOR_NUMBER_6;
-                    case "7": return Constants.FOREGROUND_COLOR_NUMBER_7;
-                    case "8": return Constants.FOREGROUND_COLOR_NUMBER_8;
-                    default: return Constants.FOREGROUND_COLOR_EMPTY;
-                }
-
+                    "1" => Constants.FOREGROUND_COLOR_NUMBER_1,
+                    "2" => Constants.FOREGROUND_COLOR_NUMBER_2,
+                    "3" => Constants.FOREGROUND_COLOR_NUMBER_3,
+                    "4" => Constants.FOREGROUND_COLOR_NUMBER_4,
+                    "5" => Constants.FOREGROUND_COLOR_NUMBER_5,
+                    "6" => Constants.FOREGROUND_COLOR_NUMBER_6,
+                    "7" => Constants.FOREGROUND_COLOR_NUMBER_7,
+                    "8" => Constants.FOREGROUND_COLOR_NUMBER_8,
+                    _ => Constants.FOREGROUND_COLOR_EMPTY,
+                };
             }
             else if (myFeld.IsMarkedAsMine)
             {
@@ -112,15 +111,19 @@ namespace Minesweeper
 
             for (int i=0;  i< theGame.Height; i++)
             {
-                RowDefinition myRowDef = new RowDefinition();
-                myRowDef.Height = new GridLength(GRID_BOX_SIZE);
+                RowDefinition myRowDef = new()
+                {
+                    Height = new GridLength(GRID_BOX_SIZE)
+                };
                 GridResult.RowDefinitions.Add(myRowDef);
             }
 
             for (int i = 0; i < theGame.Width; i++)
             {
-                ColumnDefinition myColDef = new ColumnDefinition();
-                myColDef.Width = new GridLength(GRID_BOX_SIZE);
+                ColumnDefinition myColDef = new()
+                {
+                    Width = new GridLength(GRID_BOX_SIZE)
+                };
                 GridResult.ColumnDefinitions.Add(myColDef);
             }
 
@@ -279,7 +282,7 @@ namespace Minesweeper
             {
                 return;
             }
-            Assistant myAssistant = new Assistant(theGame);
+            Assistant myAssistant = new(theGame);
             (int row, int column) = myAssistant.RecommendPosition();
             if (row >= 0 || column >= 0)
             {

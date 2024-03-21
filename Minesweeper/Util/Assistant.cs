@@ -9,8 +9,8 @@ namespace Minesweeper.Util
 {
     public class Assistant
     {
-        private KnownField[,] knownFields;
-        private GameData theGame;
+        private readonly KnownField[,] knownFields;
+        private readonly GameData theGame;
 
         public Assistant(GameData gameData)
         {

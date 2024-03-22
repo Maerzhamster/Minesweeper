@@ -312,9 +312,9 @@ namespace Minesweeper
 
         private void Key_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Tab)
+            if (e.Key == Constants.CHEATING_KEY)
             {
-                Assistant myAssistant = new Assistant(theGame);
+                Assistant myAssistant = new(theGame);
                 List<(int, int)> myRecommended = myAssistant.AllRecommendedPositions();
                 List<(int, int)> myCertainMines = myAssistant.AllCertainMines();
                 PaintListViewResult(false, myRecommended, myCertainMines);
@@ -322,7 +322,7 @@ namespace Minesweeper
         }
         private void Key_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Tab)
+            if (e.Key == Constants.CHEATING_KEY)
             {
                 PaintListViewResult();
             }

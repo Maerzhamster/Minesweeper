@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Minesweeper.Util
@@ -28,5 +29,7 @@ namespace Minesweeper.Util
         public static readonly Color FOREGROUND_COLOR_FINAL_MINE_WRONG_MARKING = Colors.Maroon;
 
         public static readonly Color BACKGROUND_COLOR_RECOMMENDED = Colors.MediumSpringGreen;
+
+        public static readonly Key CHEATING_KEY = Key.F12;
     }
 }

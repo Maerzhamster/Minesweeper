@@ -88,14 +88,17 @@ namespace Minesweeper.Util
                 }
             });
         }
-        public (int, int) RecommendPosition()
+
+        private List<(int, int)> RecommendedPositions(bool onlyFirst = true)
         {
-            var foundPosition = (-1, -1);
             bool positionFound = false;
-            for (int row=0; row<knownFields.GetLength(0); row++)
+            List < (int, int) > myRecommendations = [];
+            for (int row = 0; row < knownFields.GetLength(0); row++)
             {
                 for (int column = 0; column < knownFields.GetLength(1); column++)
                 {
+                    var surroundingCertainMines = GetSurroundingCertainMines(row, column);
+                    var surroundingUnknownFields = GetSurroundingUnknownFields(row, column);
                     if (!positionFound
                         && knownFields[row, column].IsOpen
                         && knownFields[row, column].SurroundingMines >= 0
@@ -105,16 +108,51 @@ namespace Minesweeper.Util
                         theGame.CheckSurroundingCells(row, column, (i, j) =>
                         {
                             if (!positionFound
-                            && !knownFields[i,j].IsOpen
-                            && !knownFields[i,j].CertainMine)
+                                && !knownFields[i, j].IsOpen
+                                && !knownFields[i, j].CertainMine)
                             {
                                 // Feld gefunden
-                                foundPosition = (i, j);
-                                positionFound = true;
+                                myRecommendations.Add((i, j));
+                                if (onlyFirst)
+                                {
+                                    positionFound = true;
+                                }
                             }
                         });
                     }
                 }
+            }
+            return myRecommendations;
+        }
+
+        public List<(int, int)> AllCertainMines()
+        {
+            List<(int, int)> myCertainMines = [];
+            for (int row = 0; row < knownFields.GetLength(0);row++)
+            {
+                for (int column = 0; column < knownFields.GetLength(1);column++)
+                {
+                    if (knownFields[row, column].CertainMine)
+                    {
+                        myCertainMines.Add((row, column));
+                    }
+                }
+            }
+            return myCertainMines;
+        }
+
+        public List<(int, int)> AllRecommendedPositions()
+        {
+            return RecommendedPositions(false);
+        }
+
+        public (int, int) RecommendPosition()
+        {
+            var foundPosition = (-1, -1);
+            List<(int, int)> myRecommendations = RecommendedPositions();
+            if (myRecommendations.Count > 0)
+            {
+                foundPosition = myRecommendations[0];
             }
             // Not found
             return foundPosition;

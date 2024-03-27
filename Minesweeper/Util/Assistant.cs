@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Minesweeper.Util
+﻿namespace Minesweeper.Util
 {
+    /// <summary>
+    /// Assistant to give hints for the next move
+    /// </summary>
     public class Assistant
     {
         private readonly KnownField[,] knownFields;
         private readonly GameData theGame;
 
+        /// <summary>
+        /// Create a new assistant
+        /// </summary>
+        /// <param name="gameData">the current game data</param>
         public Assistant(GameData gameData)
         {
             theGame = gameData;
@@ -54,7 +54,13 @@ namespace Minesweeper.Util
             }
         }
 
-        public int GetSurroundingUnknownFields(int row, int column)
+        /// <summary>
+        /// retrieves the number of still unknown fields that surround the current fields (including itself)
+        /// </summary>
+        /// <param name="row">the row of the given field</param>
+        /// <param name="column">the column of the given field</param>
+        /// <returns>the number of still hidden fields around this field</returns>
+        private int GetSurroundingUnknownFields(int row, int column)
         {
             int countUnknownFields = 0;
             theGame.CheckSurroundingCells(row, column, (i, j) =>
@@ -66,7 +72,13 @@ namespace Minesweeper.Util
             });
             return countUnknownFields;
         }
-        public int GetSurroundingCertainMines(int row, int column)
+        /// <summary>
+        /// retrieves the number of certain mines that surround the current fields (including itself)
+        /// </summary>
+        /// <param name="row">the row of the given field</param>
+        /// <param name="column">the column of the given field</param>
+        /// <returns>the number of certain mines around the given field</returns>
+        private int GetSurroundingCertainMines(int row, int column)
         {
             int countCertainMines = 0;
             theGame.CheckSurroundingCells(row, column, (i, j) =>
@@ -78,7 +90,8 @@ namespace Minesweeper.Util
             });
             return countCertainMines;
         }
-        public void SetAllSurroundingUnknownFieldsAreMines(int row, int column)
+
+        private void SetAllSurroundingUnknownFieldsAreMines(int row, int column)
         {
             theGame.CheckSurroundingCells(row, column, (i, j) =>
             {

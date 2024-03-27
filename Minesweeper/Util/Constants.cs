@@ -82,7 +82,13 @@ namespace Minesweeper.Util
         /// </summary>
         public static readonly Color BACKGROUND_COLOR_RECOMMENDED = Colors.MediumSpringGreen;
 
+        /// <summary>
+        /// Key that starts the cheating mode
+        /// </summary>
         public static readonly Key CHEATING_KEY = Key.F12;
+        /// <summary>
+        /// "Control"-Key for the cheating mode
+        /// </summary>
         public static readonly Key CHEATING_CTRL_KEY = Key.LeftShift;
     }
 }

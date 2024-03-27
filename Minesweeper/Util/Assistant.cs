@@ -138,6 +138,10 @@
             return myRecommendations;
         }
 
+        /// <summary>
+        /// Retrieves all the certain mines
+        /// </summary>
+        /// <returns>a list of row/column.index pairs to indicate certain mines</returns>
         public List<(int, int)> AllCertainMines()
         {
             List<(int, int)> myCertainMines = [];
@@ -154,11 +158,19 @@
             return myCertainMines;
         }
 
+        /// <summary>
+        /// Retrieves all the recommended fields
+        /// </summary>
+        /// <returns>a list of row/column.index pairs to indicate recommended fields</returns>
         public List<(int, int)> AllRecommendedPositions()
         {
             return RecommendedPositions(false);
         }
 
+        /// <summary>
+        /// Returns the recommended position
+        /// </summary>
+        /// <returns>the position (row and column index) of the recommended next move</returns>
         public (int, int) RecommendPosition()
         {
             var foundPosition = (-1, -1);

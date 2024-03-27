@@ -62,7 +62,7 @@ namespace Minesweeper
                 }
                 else
                 {
-                    MessageBox.Show("The Setting is not valid (at least half of the field must not be covered by mines)");
+                    MessageBox.Show("The Setting is not valid (at least two thirds of the field must not be covered by mines)");
                 }
             }
             catch (NotANumberException nane)

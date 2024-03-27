@@ -310,9 +310,15 @@ namespace Minesweeper
             }
         }
 
+        private bool ControlKeyPressed = false;
+
         private void Key_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Constants.CHEATING_KEY)
+            if (e.Key == Constants.CHEATING_CTRL_KEY)
+            {
+                ControlKeyPressed = true;
+            }
+            if (ControlKeyPressed && e.Key == Constants.CHEATING_KEY)
             {
                 Assistant myAssistant = new(theGame);
                 List<(int, int)> myRecommended = myAssistant.AllRecommendedPositions();
@@ -322,7 +328,11 @@ namespace Minesweeper
         }
         private void Key_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.Key == Constants.CHEATING_KEY)
+            if (e.Key == Constants.CHEATING_CTRL_KEY)
+            {
+                ControlKeyPressed = false;
+            }
+            if (ControlKeyPressed && e.Key == Constants.CHEATING_KEY)
             {
                 PaintListViewResult();
             }

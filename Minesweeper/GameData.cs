@@ -39,7 +39,7 @@ namespace Minesweeper
 
         public bool IsValid()
         {
-            return NumberOfMines < (Height * Width)/2;
+            return NumberOfMines * 3 < (Height * Width);
         }
 
         public void ResetGame()

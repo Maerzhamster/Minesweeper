@@ -1,15 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
-using System.Windows;
 
 namespace Minesweeper.Util
 {
+    /// <summary>
+    /// Reader for a text box
+    /// </summary>
     public class TextBoxReader
     {
+        /// <summary>
+        /// Retrieves the content of the text box as an integer
+        /// </summary>
+        /// <param name="textBox">the text box to be checked</param>
+        /// <param name="correspondingLabel">the corresponding label for the text box</param>
+        /// <returns>the integer</returns>
+        /// <exception cref="NotANumberException">thrown if the content of the textbox cannot be converted to an integer.</exception>
         public static int GetIntFromTextBox(TextBox textBox, Label correspondingLabel)
         {
             if (int.TryParse(textBox.Text, out int value))

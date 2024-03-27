@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using static System.Random;
-
-namespace Minesweeper
+﻿namespace Minesweeper
 {
     /// <summary>
     /// the game Data

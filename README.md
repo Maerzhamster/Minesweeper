@@ -2,7 +2,7 @@
 
 This is an implementation of a classic Minesweeper game.
 You can set the layout yourself.
-Rules for the setup
+Rules for the setup:
 - at least 10 fields size in both width and height
 - at least two third of the fields must not be mines
 - it is recommended (though not required) to not have more than 35 fields in height and 70 fields in width
@@ -19,3 +19,9 @@ Features:
 - Added "hint" button and cheat button (to see all possible hints).
 - Cheat is the left "Shift" key + F12
 - Only "direct" hints are revealed, based on certain mines in the field, not based on any "1 out of 2"-calculations or anything more complex. So after all, you should be better than the hint/cheat assistant
+
+## Version 1.0.1
+Features:
+- Setup window closing now is equal to pressing the "Start Game" button
+- Minimum value for mines (5) is regarded
+- Magic numbers from the setting window moved to Constants

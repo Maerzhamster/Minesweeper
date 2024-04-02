@@ -90,5 +90,25 @@ namespace Minesweeper.Util
         /// "Control"-Key for the cheating mode
         /// </summary>
         public static readonly Key CHEATING_CTRL_KEY = Key.LeftShift;
+        /// <summary>
+        /// The recommended maximum height
+        /// </summary>
+        public readonly static int RECOMMENDED_HEIGHT_MAX = 35;
+        /// <summary>
+        /// The recommended maximum width
+        /// </summary>
+        public readonly static int RECOMMENDED_WIDTH_MAX = 70;
+        /// <summary>
+        /// The minimum height
+        /// </summary>
+        public readonly static int HEIGHT_MIN = 10;
+        /// <summary>
+        /// The minimum width
+        /// </summary>
+        public readonly static int WIDTH_MIN = 10;
+        /// <summary>
+        /// The minimum number of mines
+        /// </summary>
+        public readonly static int MINE_NUMBER_MIN = 5;
     }
 }

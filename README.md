@@ -17,5 +17,5 @@ The game:
 ## Version 1.0
 Features:
 - Added "hint" button and cheat button (to see all possible hints).
-- Cheat button is the left "Shift" button + F12
-- Ónly "direct" hints are revealed, based on certain mines in the field, not based on any "1 out of 2"-calculations or anything more complex. So after all, you should be better than the cheat assistant
+- Cheat is the left "Shift" key + F12
+- Only "direct" hints are revealed, based on certain mines in the field, not based on any "1 out of 2"-calculations or anything more complex. So after all, you should be better than the hint/cheat assistant

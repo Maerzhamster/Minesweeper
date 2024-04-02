@@ -1,14 +1,7 @@
-﻿using System.Reflection.Metadata;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Minesweeper.Util;
 
 namespace Minesweeper
@@ -32,9 +25,23 @@ namespace Minesweeper
 
         }
 
-        private Color GetBackgroundColor(int row, int column, bool finalReveal = false)
+        private Color GetBackgroundColor(int row, int column, bool finalReveal = false, List<(int, int)> ? recommendation = null, List<(int, int)>? certainMines = null)
         {
             Minenfeld myFeld = theGame.GetMinenfeld(row, column);
+            if (recommendation != null)
+            {
+                if (recommendation.Contains((row, column)))
+                {
+                    return Constants.BACKGROUND_COLOR_RECOMMENDED;
+                }
+            }
+            if (certainMines != null)
+            {
+                if (certainMines.Contains((row, column)))
+                {
+                    return Constants.BACKGROUND_COLOR_MINE_REVEALED;
+                }
+            }
             if (myFeld.IsMine && finalReveal)
             {
                 if (myFeld.Exploded)
@@ -103,7 +110,7 @@ namespace Minesweeper
                 return Constants.FOREGROUND_COLOR_EMPTY;
             }
         }
-        private void PaintListViewResult(bool finalReveal = false)
+        private void PaintListViewResult(bool finalReveal = false, List<(int, int)>? recommendation = null, List<(int, int)>? certainMines = null)
         {
             GridResult.Children.Clear();
             GridResult.RowDefinitions.Clear();
@@ -137,7 +144,7 @@ namespace Minesweeper
                         VerticalAlignment = VerticalAlignment.Center,
                         Height = GRID_BOX_SIZE,
                         Width = GRID_BOX_SIZE,
-                        Background = new SolidColorBrush(GetBackgroundColor(i, j, finalReveal)),
+                        Background = new SolidColorBrush(GetBackgroundColor(i, j, finalReveal, recommendation, certainMines)),
                         // Margin = new Thickness(1)
                     };
                     Label myLabel = new()
@@ -145,7 +152,7 @@ namespace Minesweeper
                         Content = theGame.ToStrings(i, j, finalReveal),
                         HorizontalAlignment = HorizontalAlignment.Center,
                         VerticalAlignment = VerticalAlignment.Center,
-                        Background = new SolidColorBrush(GetBackgroundColor(i, j, finalReveal)),
+                        Background = new SolidColorBrush(GetBackgroundColor(i, j, finalReveal, recommendation, certainMines)),
                         Foreground = new SolidColorBrush(GetForegroundColor(i, j, finalReveal)),
                         FontWeight = FontWeights.Bold,
                     };
@@ -293,6 +300,34 @@ namespace Minesweeper
             else
             {
                 MessageBox.Show("The assistant cannot recommend any fields!");
+            }
+        }
+
+        private bool ControlKeyPressed = false;
+
+        private void Key_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Constants.CHEATING_CTRL_KEY)
+            {
+                ControlKeyPressed = true;
+            }
+            if (ControlKeyPressed && e.Key == Constants.CHEATING_KEY)
+            {
+                Assistant myAssistant = new(theGame);
+                List<(int, int)> myRecommended = myAssistant.AllRecommendedPositions();
+                List<(int, int)> myCertainMines = myAssistant.AllCertainMines();
+                PaintListViewResult(false, myRecommended, myCertainMines);
+            }
+        }
+        private void Key_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Constants.CHEATING_CTRL_KEY)
+            {
+                ControlKeyPressed = false;
+            }
+            if (ControlKeyPressed && e.Key == Constants.CHEATING_KEY)
+            {
+                PaintListViewResult();
             }
         }
     }

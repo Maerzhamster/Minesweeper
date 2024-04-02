@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 using Minesweeper.Util;
 
 namespace Minesweeper
@@ -20,8 +8,10 @@ namespace Minesweeper
     /// </summary>
     public partial class Setting : Window
     {
-        readonly static int RECOMMENDED_HEIGHT_MAX = 35;
-        readonly static int RECOMMENDED_WIDTH_MAX = 70;
+        private readonly static int RECOMMENDED_HEIGHT_MAX = 35;
+        private readonly static int RECOMMENDED_WIDTH_MAX = 70;
+        private readonly static int HEIGHT_MIN = 10;
+        private readonly static int WIDTH_MIN = 10;
         public Setting()
         {
             InitializeComponent();
@@ -33,6 +23,16 @@ namespace Minesweeper
             {
                 int height = TextBoxReader.GetIntFromTextBox(TextBoxHeight, LabelHeight);
                 int width = TextBoxReader.GetIntFromTextBox(TextBoxWidth, LabelWidth);
+                if (height < HEIGHT_MIN)
+                {
+                    MessageBox.Show(String.Format("Height must be at least {0}.", HEIGHT_MIN));
+                    return;
+                }
+                if (width < WIDTH_MIN)
+                {
+                    MessageBox.Show(String.Format("Width must be at least {0}.", WIDTH_MIN));
+                    return;
+                }
                 if (height > RECOMMENDED_HEIGHT_MAX)
                 {
                     string message = String.Format("Height exceeds recommended maximum of {0}. Continue anyway?", RECOMMENDED_HEIGHT_MAX);
@@ -62,7 +62,7 @@ namespace Minesweeper
                 }
                 else
                 {
-                    MessageBox.Show("The Setting is not valid (at least half of the field must not be covered by mines)");
+                    MessageBox.Show("The Setting is not valid (at least two thirds of the field must not be covered by mines)");
                 }
             }
             catch (NotANumberException nane)

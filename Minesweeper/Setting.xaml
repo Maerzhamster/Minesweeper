@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Minesweeper"
         mc:Ignorable="d"
         Title="Minesweeper Setting" Height="200" Width="300"
-        Margin="10px" WindowStartupLocation="CenterScreen">
+        Margin="10px" WindowStartupLocation="CenterScreen" Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>

@@ -59,7 +59,7 @@
         /// <returns>true if the size is valid, false otherwise</returns>
         public bool IsValid()
         {
-            return NumberOfMines < (Height * Width)/2;
+            return NumberOfMines * 3 < (Height * Width);
         }
 
         /// <summary>

@@ -1,4 +1,5 @@
-﻿using System.Windows.Media;
+﻿using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Minesweeper.Util
 {
@@ -80,5 +81,14 @@ namespace Minesweeper.Util
         /// background color for a hint
         /// </summary>
         public static readonly Color BACKGROUND_COLOR_RECOMMENDED = Colors.MediumSpringGreen;
+
+        /// <summary>
+        /// Key that starts the cheating mode
+        /// </summary>
+        public static readonly Key CHEATING_KEY = Key.F12;
+        /// <summary>
+        /// "Control"-Key for the cheating mode
+        /// </summary>
+        public static readonly Key CHEATING_CTRL_KEY = Key.LeftShift;
     }
 }

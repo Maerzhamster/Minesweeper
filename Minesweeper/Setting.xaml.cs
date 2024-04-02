@@ -8,8 +8,10 @@ namespace Minesweeper
     /// </summary>
     public partial class Setting : Window
     {
-        readonly static int RECOMMENDED_HEIGHT_MAX = 35;
-        readonly static int RECOMMENDED_WIDTH_MAX = 70;
+        private readonly static int RECOMMENDED_HEIGHT_MAX = 35;
+        private readonly static int RECOMMENDED_WIDTH_MAX = 70;
+        private readonly static int HEIGHT_MIN = 10;
+        private readonly static int WIDTH_MIN = 10;
         public Setting()
         {
             InitializeComponent();
@@ -21,6 +23,16 @@ namespace Minesweeper
             {
                 int height = TextBoxReader.GetIntFromTextBox(TextBoxHeight, LabelHeight);
                 int width = TextBoxReader.GetIntFromTextBox(TextBoxWidth, LabelWidth);
+                if (height < HEIGHT_MIN)
+                {
+                    MessageBox.Show(String.Format("Height must be at least {0}.", HEIGHT_MIN));
+                    return;
+                }
+                if (width < WIDTH_MIN)
+                {
+                    MessageBox.Show(String.Format("Width must be at least {0}.", WIDTH_MIN));
+                    return;
+                }
                 if (height > RECOMMENDED_HEIGHT_MAX)
                 {
                     string message = String.Format("Height exceeds recommended maximum of {0}. Continue anyway?", RECOMMENDED_HEIGHT_MAX);

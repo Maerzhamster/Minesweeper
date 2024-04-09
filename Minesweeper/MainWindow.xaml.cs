@@ -116,7 +116,7 @@ namespace Minesweeper
             GridResult.RowDefinitions.Clear();
             GridResult.ColumnDefinitions.Clear();
 
-            for (int i=0;  i< theGame.Height; i++)
+            for (int i=0; i< theGame.Height; i++)
             {
                 RowDefinition myRowDef = new()
                 {
@@ -329,6 +329,14 @@ namespace Minesweeper
             {
                 PaintListViewResult();
             }
+        }
+
+        private void ButtonNewGameUpdateSetting_Click(object sender, RoutedEventArgs e)
+        {
+            Setting mySetting = new();
+            mySetting.ShowDialog();
+            theGame.ResetGame();
+            PaintListViewResult();
         }
     }
 }

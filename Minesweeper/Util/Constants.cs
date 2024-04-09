@@ -105,10 +105,14 @@ namespace Minesweeper.Util
         /// <summary>
         /// The minimum width
         /// </summary>
-        public readonly static int WIDTH_MIN = 10;
+        public readonly static int WIDTH_MIN = 12;
         /// <summary>
         /// The minimum number of mines
         /// </summary>
         public readonly static int MINE_NUMBER_MIN = 5;
+        /// <summary>
+        /// The default start number of mines
+        /// </summary>
+        public readonly static int MINE_NUMBER_DEFAULT = 10;
     }
 }

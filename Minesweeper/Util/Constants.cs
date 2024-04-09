@@ -110,5 +110,9 @@ namespace Minesweeper.Util
         /// The minimum number of mines
         /// </summary>
         public readonly static int MINE_NUMBER_MIN = 5;
+        /// <summary>
+        /// The default start number of mines
+        /// </summary>
+        public readonly static int MINE_NUMBER_DEFAULT = 10;
     }
 }

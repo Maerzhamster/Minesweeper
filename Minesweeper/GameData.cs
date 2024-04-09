@@ -1,4 +1,7 @@
-﻿namespace Minesweeper
+﻿using Minesweeper.Util;
+using System.Reflection.Metadata;
+
+namespace Minesweeper
 {
     /// <summary>
     /// the game Data
@@ -11,10 +14,10 @@
         private GameData()
         {
             myRandom = new Random(DateTime.Now.Millisecond);
-            Minenfields = new Minenfeld[10,10];
-            Height = 10;
-            Width = 12;
-            NumberOfMines = 10;
+            Minenfields = new Minenfeld[Constants.HEIGHT_MIN,Constants.WIDTH_MIN];
+            Height = Constants.HEIGHT_MIN;
+            Width = Constants.WIDTH_MIN;
+            NumberOfMines = Constants.MINE_NUMBER_DEFAULT;
         }
 
         private readonly Random myRandom;

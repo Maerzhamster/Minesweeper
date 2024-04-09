@@ -11,6 +11,10 @@ namespace Minesweeper
         public Setting()
         {
             InitializeComponent();
+            GameData theGame = GameData.GetInstance();
+            TextBoxHeight.Text = theGame.Height.ToString();
+            TextBoxWidth.Text = theGame.Width.ToString();
+            TextBoxMineNumber.Text = theGame.NumberOfMines.ToString();
         }
 
         private void ButtonSetting_Click(object sender, RoutedEventArgs e)

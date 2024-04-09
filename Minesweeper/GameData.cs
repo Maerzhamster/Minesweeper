@@ -12,6 +12,9 @@
         {
             myRandom = new Random(DateTime.Now.Millisecond);
             Minenfields = new Minenfeld[10,10];
+            Height = 10;
+            Width = 12;
+            NumberOfMines = 10;
         }
 
         private readonly Random myRandom;

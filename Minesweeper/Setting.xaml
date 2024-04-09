@@ -5,10 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Minesweeper"
         mc:Ignorable="d"
-        Title="Minesweeper Setting" Height="200" Width="300"
+        Title="Minesweeper Setting" Height="300" Width="300"
         Margin="10px" WindowStartupLocation="CenterScreen" Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
@@ -18,12 +19,13 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Label x:Name="LabelHeight" Grid.Row="0" Grid.Column="0">Height:</Label>
-        <TextBox x:Name="TextBoxHeight" Grid.Row="0" Grid.Column="1" Text="10"></TextBox>
-        <Label x:Name="LabelWidth" Grid.Row="1" Grid.Column="0">Width:</Label>
-        <TextBox x:Name="TextBoxWidth" Grid.Row="1" Grid.Column="1" Text="10"></TextBox>
-        <Label x:Name="LabelMineNumber" Grid.Row="2" Grid.Column="0">Number of Mines:</Label>
-        <TextBox x:Name="TextBoxMineNumber" Grid.Row="2" Grid.Column="1" Text="10"></TextBox>
-        <Button x:Name="ButtonSetting" Grid.Row="3" Grid.Column="1" Content="Start Game" Click="ButtonSetting_Click"></Button>
+        <Label Content="Minesweeper" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontFamily="Sylfaen" FontSize="30" HorizontalAlignment="Center" ></Label>
+        <Label x:Name="LabelHeight" Grid.Row="1" Grid.Column="0" Margin="10px">Height:</Label>
+        <TextBox x:Name="TextBoxHeight" Grid.Row="1" Grid.Column="1" Text="10" Margin="10px"></TextBox>
+        <Label x:Name="LabelWidth" Grid.Row="2" Grid.Column="0" Margin="10px">Width:</Label>
+        <TextBox x:Name="TextBoxWidth" Grid.Row="2" Grid.Column="1" Text="10" Margin="10px"></TextBox>
+        <Label x:Name="LabelMineNumber" Grid.Row="3" Grid.Column="0" Margin="10px">Number of Mines:</Label>
+        <TextBox x:Name="TextBoxMineNumber" Grid.Row="3" Grid.Column="1" Text="10" Margin="10px"></TextBox>
+        <Button x:Name="ButtonSetting" Grid.Row="4" Grid.Column="1" Content="Start Game" Click="ButtonSetting_Click" Margin="10px"></Button>
     </Grid>
 </Window>

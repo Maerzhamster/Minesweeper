@@ -26,11 +26,13 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Button x:Name="ButtonTipp" Grid.Row="0" Grid.Column="0" Content="Hint" Margin="5" Click="ButtonTipp_Click"/>
             <Button x:Name="ButtonCheckFinish" Grid.Row="0" Grid.Column="1" Content="Check Finish" Margin="5" Click="ButtonCheckFinish_Click"></Button>
             <Button x:Name="ButtonNewGame" Grid.Row="0" Grid.Column="2" Content="Restart" Margin="5" Click="ButtonNewGame_Click"></Button>
-            <Button x:Name="ButtonQuit" Grid.Row="0" Grid.Column="3" Content="Quit" Click="ButtonQuit_Click" Margin="5"></Button>
+            <Button x:Name="ButtonNewGameUpdateSetting" Grid.Row="0" Grid.Column="3" Content="New Setting" Margin="5" Click="ButtonNewGameUpdateSetting_Click"></Button>
+            <Button x:Name="ButtonQuit" Grid.Row="0" Grid.Column="4" Content="Quit" Click="ButtonQuit_Click" Margin="5"></Button>
         </Grid>
     </Grid>
 </Window>

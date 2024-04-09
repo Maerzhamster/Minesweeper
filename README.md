@@ -25,3 +25,8 @@ Features:
 - Setup window closing now is equal to pressing the "Start Game" button
 - Minimum value for mines (5) is regarded
 - Magic numbers from the setting window moved to Constants
+
+## Version 1.0.2
+Features:
+- Minimum value for width and height is regarded
+- "New settings" button added

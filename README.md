@@ -30,3 +30,10 @@ Features:
 Features:
 - Minimum value for width and height is regarded
 - "New settings" button added
+
+## Version 1.0.3
+Features:
+- Minimum width changed
+- Layout "settings"-Menu improved
+- Moved buttons to Menu
+- Timer and unmarked mines counter added

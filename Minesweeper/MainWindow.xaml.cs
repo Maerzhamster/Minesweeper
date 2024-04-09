@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Text;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -13,6 +14,9 @@ namespace Minesweeper
     {
         private readonly GameData theGame;
 
+        private readonly System.Windows.Threading.DispatcherTimer dispatcherTimer;
+        private DateTime startTimer = DateTime.Now;
+
         private const int GRID_BOX_SIZE = 25;
         public MainWindow()
         {
@@ -20,11 +24,41 @@ namespace Minesweeper
             theGame = GameData.GetInstance();
             Setting mySetting = new();
             mySetting.ShowDialog();
+            dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+            dispatcherTimer.Tick += new EventHandler(DispatcherTimer_Tick);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            RestartTimer();
             theGame.ResetGame();
             PaintListViewResult();
-
         }
 
+        private void RestartTimer()
+        {
+            startTimer = DateTime.Now;
+            SetTimerValue();
+            dispatcherTimer.Start();
+        }
+
+        private void SetTimerValue()
+        {
+            TimeSpan myTimeSpan = DateTime.Now - startTimer;
+
+            int hours = myTimeSpan.Hours;
+            int minutes = myTimeSpan.Minutes;
+            int seconds = myTimeSpan.Seconds;
+            StringBuilder myDisplay = new();
+            if (hours > 0)
+            {
+                myDisplay.Append(hours.ToString("D2") + ":");
+            }
+            myDisplay.Append(minutes.ToString("D2") + ":" + seconds.ToString("D2"));
+            TextBoxTimer.Content = myDisplay.ToString();
+
+        }
+        private void DispatcherTimer_Tick(object? sender, EventArgs e)
+        {
+            SetTimerValue();
+        }
         private Color GetBackgroundColor(int row, int column, bool finalReveal = false, List<(int, int)> ? recommendation = null, List<(int, int)>? certainMines = null)
         {
             Minenfeld myFeld = theGame.GetMinenfeld(row, column);
@@ -134,10 +168,17 @@ namespace Minesweeper
                 GridResult.ColumnDefinitions.Add(myColDef);
             }
 
+            int markedFields = 0;
+
             for (int i = 0; i < theGame.Height; i++)
             {
                 for (int j = 0; j < theGame.Width; j++)
                 {
+                    Minenfeld minenfeld = GameData.GetInstance().GetMinenfeld(i, j);
+                    if (minenfeld.IsMarkedAsMine)
+                    {
+                        markedFields++;
+                    }
                     Panel panel = new Canvas()
                     {
                         HorizontalAlignment = HorizontalAlignment.Center,
@@ -162,6 +203,7 @@ namespace Minesweeper
                     GridResult.Children.Add(panel);
                 }
             }
+            TextBoxMinesToGo.Content = (GameData.GetInstance().NumberOfMines - markedFields).ToString();
         }
 
         private void ButtonQuit_Click(object sender, RoutedEventArgs e)
@@ -171,6 +213,8 @@ namespace Minesweeper
 
         private void EndGameLost()
         {
+            SetTimerValue();
+            dispatcherTimer.Stop();
             MessageBox.Show("You lost!");
             theGame.Lost = true;
             PaintListViewResult(true);
@@ -178,8 +222,11 @@ namespace Minesweeper
 
         private void EndGameWin()
         {
+            SetTimerValue();
+            dispatcherTimer.Stop();
             MessageBox.Show("You won!");
             PaintListViewResult(true);
+            TextBoxMinesToGo.Content = "0";
         }
 
         private void HandleOpenField(int row, int column)
@@ -240,6 +287,12 @@ namespace Minesweeper
 
         private void ButtonNewGame_Click(object sender, RoutedEventArgs e)
         {
+            if (CheckedWhenNewSetting.IsChecked)
+            {
+                Setting mySetting = new();
+                mySetting.ShowDialog();
+            }
+            RestartTimer();
             theGame.ResetGame();
             PaintListViewResult();
         }
@@ -335,6 +388,7 @@ namespace Minesweeper
         {
             Setting mySetting = new();
             mySetting.ShowDialog();
+            RestartTimer();
             theGame.ResetGame();
             PaintListViewResult();
         }

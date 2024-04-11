@@ -37,3 +37,9 @@ Features:
 - Layout "settings"-Menu improved
 - Moved buttons to Menu
 - Timer and unmarked mines counter added
+
+## Version 1.0.4
+Features:
+- Second Cheat (Left Shift+F7) for displaying all mines
+- NUnit Test added
+- (Code only) Namespaces are not another bracket level

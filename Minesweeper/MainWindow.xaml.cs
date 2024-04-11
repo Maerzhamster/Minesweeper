@@ -371,6 +371,10 @@ namespace Minesweeper
                 List<(int, int)> myCertainMines = myAssistant.AllCertainMines();
                 PaintListViewResult(false, myRecommended, myCertainMines);
             }
+            if (ControlKeyPressed && e.Key == Constants.CHEATING_KEY2)
+            {
+                PaintListViewResult(true);
+            }
         }
         private void Key_KeyUp(object sender, KeyEventArgs e)
         {
@@ -378,7 +382,11 @@ namespace Minesweeper
             {
                 ControlKeyPressed = false;
             }
-            if (ControlKeyPressed && e.Key == Constants.CHEATING_KEY)
+            if (e.Key == Constants.CHEATING_KEY)
+            {
+                PaintListViewResult();
+            }
+            if (e.Key == Constants.CHEATING_KEY2)
             {
                 PaintListViewResult();
             }

@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using Minesweeper.Util;
 
 namespace Minesweeper;
@@ -12,9 +13,20 @@ public partial class Setting : Window
     {
         InitializeComponent();
         GameData theGame = GameData.GetInstance();
-        TextBoxHeight.Text = theGame.Height.ToString();
-        TextBoxWidth.Text = theGame.Width.ToString();
-        TextBoxMineNumber.Text = theGame.NumberOfMines.ToString();
+        ComboBoxSetSelectionRange(ComboBoxHeight, Constants.HEIGHT_MIN, Constants.RECOMMENDED_HEIGHT_MAX);
+        ComboBoxHeight.Text = theGame.Height.ToString();
+        ComboBoxSetSelectionRange(ComboBoxWidth, Constants.WIDTH_MIN, Constants.RECOMMENDED_WIDTH_MAX);
+        ComboBoxWidth.Text = theGame.Width.ToString();
+        ComboBoxMineNumber.Text = theGame.NumberOfMines.ToString();
+    }
+
+    public static void ComboBoxSetSelectionRange(ComboBox comboBox, int minValue, int maxValue)
+    {
+        comboBox.Items.Clear();
+        for (int i = minValue; i <= maxValue; i++)
+        {
+            comboBox.Items.Add(i.ToString());
+        }
     }
 
     private void ButtonSetting_Click(object sender, RoutedEventArgs e)
@@ -26,8 +38,8 @@ public partial class Setting : Window
     {
         try
         {
-            int height = TextBoxReader.GetIntFromTextBox(TextBoxHeight, LabelHeight);
-            int width = TextBoxReader.GetIntFromTextBox(TextBoxWidth, LabelWidth);
+            int height = ComboBoxReader.GetIntFromComboBox(ComboBoxHeight, LabelHeight);
+            int width = ComboBoxReader.GetIntFromComboBox(ComboBoxWidth, LabelWidth);
             if (height < Constants.HEIGHT_MIN)
             {
                 MessageBox.Show(String.Format("Height must be at least {0}.", Constants.HEIGHT_MIN));
@@ -60,7 +72,7 @@ public partial class Setting : Window
                     return;
                 }
             }
-            int numberOfMines = TextBoxReader.GetIntFromTextBox(TextBoxMineNumber, LabelMineNumber);
+            int numberOfMines = ComboBoxReader.GetIntFromComboBox(ComboBoxMineNumber, LabelMineNumber);
             if (numberOfMines < Constants.MINE_NUMBER_MIN)
             {
                 MessageBox.Show(String.Format("There must be at least {0} mines.", Constants.MINE_NUMBER_MIN));
@@ -83,5 +95,30 @@ public partial class Setting : Window
             MessageBox.Show(nane.Message);
             e.Cancel = true;
         }
+    }
+
+    private void ResetMineNumberComboBox()
+    {
+        try
+        {
+            int height = ComboBoxReader.GetIntFromComboBox(ComboBoxHeight, LabelHeight);
+            int width = ComboBoxReader.GetIntFromComboBox(ComboBoxWidth, LabelWidth);
+            int mineNumberMax = Convert.ToInt32(Math.Floor(height * width / 3.0));
+            ComboBoxSetSelectionRange(ComboBoxMineNumber, Constants.MINE_NUMBER_MIN, mineNumberMax);
+        }
+        catch (NotANumberException)
+        {
+            // ignore
+        }
+    }
+
+    private void TextBoxHeight_DropDownClosed(object sender, EventArgs e)
+    {
+        ResetMineNumberComboBox();
+    }
+
+    private void TextBoxWidth_DropDownClosed(object sender, EventArgs e)
+    {
+        ResetMineNumberComboBox();
     }
 }

@@ -21,11 +21,11 @@
         </Grid.ColumnDefinitions>
         <Label Content="Minesweeper" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontFamily="Sylfaen" FontSize="30" HorizontalAlignment="Center" ></Label>
         <Label x:Name="LabelHeight" Grid.Row="1" Grid.Column="0" Margin="10px">Height:</Label>
-        <TextBox x:Name="TextBoxHeight" Grid.Row="1" Grid.Column="1" Text="10" Margin="10px"></TextBox>
+        <ComboBox x:Name="ComboBoxHeight" Grid.Row="1" Grid.Column="1" Text="10" Margin="10px" IsEditable="True" DropDownClosed="TextBoxHeight_DropDownClosed"></ComboBox>
         <Label x:Name="LabelWidth" Grid.Row="2" Grid.Column="0" Margin="10px">Width:</Label>
-        <TextBox x:Name="TextBoxWidth" Grid.Row="2" Grid.Column="1" Text="10" Margin="10px"></TextBox>
+        <ComboBox x:Name="ComboBoxWidth" Grid.Row="2" Grid.Column="1" Text="10" Margin="10px" IsEditable="True" DropDownClosed="TextBoxWidth_DropDownClosed"></ComboBox>
         <Label x:Name="LabelMineNumber" Grid.Row="3" Grid.Column="0" Margin="10px">Number of Mines:</Label>
-        <TextBox x:Name="TextBoxMineNumber" Grid.Row="3" Grid.Column="1" Text="10" Margin="10px"></TextBox>
+        <ComboBox x:Name="ComboBoxMineNumber" Grid.Row="3" Grid.Column="1" Text="10" Margin="10px" IsEditable="True"></ComboBox>
         <Button x:Name="ButtonSetting" Grid.Row="4" Grid.Column="1" Content="Start Game" Click="ButtonSetting_Click" Margin="10px"></Button>
     </Grid>
 </Window>

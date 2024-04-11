@@ -43,3 +43,7 @@ Features:
 - Second Cheat (Left Shift+F7) for displaying all mines
 - NUnit Test added
 - (Code only) Namespaces are not another bracket level
+
+# Version 1.0.5
+Features:
+- Combobox to choose start setting
